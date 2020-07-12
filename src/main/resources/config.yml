@@ -1,4 +1,5 @@
 graal-options:
   - name: js.nashorn-compat
     value: true
-entry-file: js/internal/init.js
+js-directory: js
+entry-file: internal/init.js

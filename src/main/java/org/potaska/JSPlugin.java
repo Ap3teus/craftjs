@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,8 @@ public class JSPlugin extends JavaPlugin {
         FileConfiguration config = this.getConfig();
 
         List<Map<?, ?>> map = config.getMapList("graal-options");
-        String entryFile = config.getString("entry-file");
+        String mainDir = config.getString("js-directory", "js");
+        String entryFile = config.getString("entry-file", "internal/init.js");
 
         try {
             Map<String, String> options = new HashMap<String, String>();
@@ -35,9 +37,9 @@ public class JSPlugin extends JavaPlugin {
                 options.put(name, value);
             }
             System.out.println(options);
-            System.out.println(entryFile);
+            System.out.println(mainDir + ", " + entryFile);
 
-            Path entry = Paths.get(entryFile);
+            Path entry = Paths.get(mainDir, entryFile);
 
             Files.createDirectories(entry.getParent());
             File initFile = entry.toFile();
