@@ -82,6 +82,7 @@ public class JSPlugin extends JavaPlugin {
             ctx = Context.newBuilder("js").allowExperimentalOptions(true).allowIO(true).allowHostAccess(HostAccess.ALL)
                     .allowHostClassLookup(className -> true).options(options).build();
             ctx.getBindings("js").putMember("__ctx", ctx);
+            ctx.getBindings("js").putMember("__plugin", this);
             ctx.eval(Source.newBuilder("js", initFile).build());
         } catch (PolyglotException | IOException e) {
             System.out.println(e);
