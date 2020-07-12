@@ -1,6 +1,8 @@
 # CraftJS
 
-Spigot Plugin that allows programming custom functionality for your server using Javascript. Inspired heavily by [ScriptCraft](https://github.com/walterhiggins/ScriptCraft) but trying to address some of it's issues.
+***NOTE: Under heavy development***
+
+Spigot Plugin that allows programming custom functionality for your server using Javascript. Inspired heavily by [Scriptcraft](https://github.com/walterhiggins/ScriptCraft) but trying to address some of it's issues.
 
 ## Getting Started
 
@@ -11,3 +13,7 @@ Currently the only way to obtain the plugin jar is to build it from the source.
 0. Make sure you have `maven` installed
 1. Run `mvn install`
 2. Copy the built jar from `target` to your server's plugins-folder
+
+## Differences to Scriptcraft
+
+CraftJS and Scriptcraft are both essentially just a Javascript engine wrapped into a Spigot plugin. Scriptcraft uses now deprecated [Nashorn](https://openjdk.java.net/projects/nashorn/) -engine, while CraftJS uses [Graal](https://www.graalvm.org/docs/reference-manual/languages/js/). This allows the executing code to use more recent (ES6+) Javascript features without using transpilers (like [Babel](https://babeljs.io)), and should also allow for much better performance.
