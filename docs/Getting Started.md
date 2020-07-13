@@ -60,7 +60,7 @@ This will assume your source code resides at `my-plugin/src` and compiled javasc
 ```
 The key being the `"main"`-field. This will treat `my-plugin/src/index.ts` (which compiles to `my-plugin/dist/index.js`) as your plugin's entrypoint and execute that when your plugin loads. At this point you are essentially set. `tsc --watch` can be used for development time automatic watch compilation.
 
-## Development
+# Development
 
 *Note: this section's examples use Typescript*
 
@@ -106,6 +106,8 @@ All of the above are valid ways of importing a java class. The `import` statemen
 
 ## Java interop
 
+### Arrays
+
 Graal allows using Java-arrays (and array-like objects) in much the same way as you would a regular Javascript-array. Consider the following:
 
 ```ts
@@ -135,3 +137,27 @@ const players = [...server.onlinePlayers];
 players.concat([]);
 ```
 
+### Extending Java classes
+
+Sometimes you may find yourself in a situtation where you need to extend or implement a Java class or interface. This does not work with the ES6 class syntax (see more info [here](https://github.com/graalvm/graaljs/issues/32)), but instead with a special `Java.extend`-function. Internally this is used when registering events, but you probably won't need to do anything with it.
+
+```ts
+import { Runnable } from 'java.lang';
+
+// Create the class
+const MyRunnable = Java.extend(
+  Runnable,
+  {
+    run() {
+      console.log('hello world!');
+    }
+  });
+
+// Create an instance of the class
+const runnable = new MyRunnable();
+
+// Run it
+runnable.run();
+```
+
+Note that this works even though `Runnable` is a Java interface, not a class, and we are implementing it instead of extending.
