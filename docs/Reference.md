@@ -11,6 +11,8 @@
 | __plugin   | [Plugin](https://papermc.io/javadocs/paper/1.16/org/bukkit/plugin/Plugin.html)   | The CraftJS plugin-object                                      |
 | __ctx      | [Context](https://www.graalvm.org/sdk/javadoc/org/graalvm/polyglot/Context.html) | GraalJS context where the javascript code is being executed    |
 
+---
+
 ## Require
 
 ``` ts
@@ -39,6 +41,8 @@ const foo = require('./foo');
 // Require a Java-package
 const { File } = require('java.io');
 ```
+
+---
 
 ## RegisterEvent
 
@@ -78,10 +82,10 @@ registerCommand(name, callback): void
 
 ### Parameters
 
-| Name | Type     |
-|------|----------|
-| name | `string` |
-|callback| `(sender: ` [CommandSender](https://papermc.io/javadocs/paper/1.16/org/bukkit/command/CommandSender.html) `, label: string, args: string[]) => void | boolean`
+| Name     | Type                                                                                                                                                           |
+|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name     | `string`                                                                                                                                                       |
+| callback | `(sender: ` [CommandSender](https://papermc.io/javadocs/paper/1.16/org/bukkit/command/CommandSender.html) `, label: string, args: string[]) => void | boolean` |
 
 ### Description
 
@@ -98,3 +102,5 @@ registerCommand('hello', (sender, label, args) => {
 // > /hello dude
 // < Hello dude !
 ```
+
+---
