@@ -13,6 +13,7 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,8 @@ import org.graalvm.polyglot.*;
 
 public class JSPlugin extends JavaPlugin {
     Context ctx;
+
+    List<String> FOLDERS_TO_IMPORT = Arrays.asList(new String[] { "internal", "types", "plugins" });
 
     public void refresh() {
         Bukkit.getPluginManager().disablePlugin(this);
@@ -64,17 +67,23 @@ public class JSPlugin extends JavaPlugin {
                 FileChannel fc = os.getChannel();
                 os.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 
-                Path extracted = Utils.unzip(zipPath.toFile(), tmpDir.toFile()).toPath();
-                Stream<Path> files = Files.list(extracted);
+                Path root = Utils.unzip(zipPath.toFile(), tmpDir.toFile()).toPath();
+                Stream<Path> files = Files.list(root);
                 files.forEach(file -> {
-                    Path rel = extracted.relativize(file);
+                    Path rel = root.relativize(file);
+                    Path folder = rel.subpath(0, 1);
+                    if (!FOLDERS_TO_IMPORT.contains(folder.toString().toLowerCase())) {
+                        return;
+                    }
                     Path target = dir.resolve(rel);
+                    System.out.println(rel + ", " + folder + ", " + target);
                     try {
                         Files.move(file, target);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 });
+                files.close();
             }
 
             Path entry = Paths.get(mainDir, entryFile);
