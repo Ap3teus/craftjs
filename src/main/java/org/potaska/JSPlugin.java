@@ -51,8 +51,6 @@ public class JSPlugin extends JavaPlugin {
                 }
                 options.put(name, value);
             }
-            System.out.println(options);
-            System.out.println(mainDir + ", " + entryFile);
 
             Path dir = Paths.get(mainDir);
 
