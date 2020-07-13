@@ -1,5 +1,33 @@
 # CraftJS API reference
 
+## Require
+
+```ts
+require(module): void
+```
+
+### Parameters
+
+|Name|Type|
+|-|-|
+|module|`string`|
+
+### Description
+
+Works like NodeJS `require`, and imports `module` as a local file or from `node_modules` -directory.
+
+### Examples
+
+```ts
+// Require npm module
+const _ = require('lodash');
+
+// Require a local file
+const foo = require('./foo');
+
+```
+
+
 ## RegisterEvent
 
 ```ts
