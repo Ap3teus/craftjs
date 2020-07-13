@@ -59,3 +59,79 @@ This will assume your source code resides at `my-plugin/src` and compiled javasc
 }
 ```
 The key being the `"main"`-field. This will treat `my-plugin/src/index.ts` (which compiles to `my-plugin/dist/index.js`) as your plugin's entrypoint and execute that when your plugin loads. At this point you are essentially set. `tsc --watch` can be used for development time automatic watch compilation.
+
+## Development
+
+*Note: this section's examples use Typescript*
+
+CraftJS is essentially just a Javascript runtime running on top of JVM as a Spigot plugin. This means that you can do (almost) everything that a regular Spigot-plugin programmed with Java can.
+
+```ts
+import { PlayerInteractEvent } from 'org.bukkit.event.player';
+
+registerEvent(PlayerInteractEvent, event => {
+  event.player.sendMessage(`${event.item.amount}x`);
+});
+```
+
+This snippet registers a handler for `PlayerInteractEvent` and sends the size of player's tool stack to the player when the event is triggered. Note that we're using `event.player` instead of `event.getPlayer()` which you would have to use in Java. These are essentially identical, and the latter approach works, but it takes up more space, and makes neat things like object destructuring impossible.
+
+```ts
+// Destructuring
+registerEvent(PlayerInteractEvent, ({ player, item }) => {
+  player.sendMessage(`${item.amount}x`);
+});
+
+// This also works
+registerEvent(PlayerInteractEvent, event => {
+  event.getPlayer().sendMessage(`${event.getItem().amount}x`);
+});
+```
+
+## Imports
+
+```ts
+import { PlayerInteractEvent as a } from 'org.bukkit.event.player';
+
+const { PlayerInteractEvent: b } = require('org.bukkit.event.player');
+
+const c = org.bukkit.event.player.PlayerInteractEvent;
+
+// # true
+console.log(a === b && a === c && b === c);
+```
+
+All of the above are valid ways of importing a java class. The `import` statements gets compiled to a `require` -call by Typescript, and the `require` returns the corresponding java-package. Since the Typescript definitions "fool" the Typescript language server to think they are just regular Javascript modules, editor autocomplete functionality (in the likes of [VS Code](https://code.visualstudio.com/)) can automatically prompt you to import a class from a Java package. The third way is useful if you want to import a class that doesn't have typings.
+
+
+## Java interop
+
+Graal allows using Java-arrays (and array-like objects) in much the same way as you would a regular Javascript-array. Consider the following:
+
+```ts
+// equivalent to server.getOnlinePlayers()
+const players = server.onlinePlayers;
+// Logs the first entry in the list of online players to console
+console.log(players[0]);
+
+// This logs the amount of players
+console.log(players.length);
+
+// Iterating also works as expected
+for (const player of players) {
+  console.log(player);
+}
+
+// This will however throw an error
+players.concat([]);
+```
+
+The `players`-object is not actually a Javascript array, so it doesn't have Javascript array methods (`map`, `slice`, ...). Graal however provides ways to interact with it as if it was, hence why indexing and iterating (and `.length`) work just fine. Easiest way to convert a Java array (or `Collection`, `List`, etc...) to a regular JS array is by using ES6 array spread syntax:
+
+```ts
+const players = [...server.onlinePlayers];
+
+// This now works :)
+players.concat([]);
+```
+
