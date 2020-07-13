@@ -18,12 +18,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.graalvm.polyglot.*;
 
 public class JSPlugin extends JavaPlugin {
     Context ctx;
+
+    public void refresh() {
+        Bukkit.getPluginManager().disablePlugin(this);
+        Bukkit.getPluginManager().enablePlugin(this);
+    }
 
     @Override
     public void onEnable() {
