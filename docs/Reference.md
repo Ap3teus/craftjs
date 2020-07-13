@@ -52,11 +52,11 @@ registerEvent(event, callback, priority?): Function
 
 ### Parameters
 
-| Name     | Type                                                                                                       |
-|----------|------------------------------------------------------------------------------------------------------------|
-| event    | `typeof` [Event](https://papermc.io/javadocs/paper/1.16/org/bukkit/event/Event.html)                       |
-| callback | `(e: typeof event) => void`                                                                                |
-| priority | [EventPriority](https://papermc.io/javadocs/paper/1.16/org/bukkit/event/EventPriority.html) ` | undefined` |
+| Name     | Type                                                                                                   |
+|----------|--------------------------------------------------------------------------------------------------------|
+| event    | `typeof` [Event](https://papermc.io/javadocs/paper/1.16/org/bukkit/event/Event.html)                   |
+| callback | `(e: typeof event) => void`                                                                            |
+| priority | [EventPriority](https://papermc.io/javadocs/paper/1.16/org/bukkit/event/EventPriority.html) (optional) |
 
 ### Description
 
@@ -82,14 +82,14 @@ registerCommand(name, callback): void
 
 ### Parameters
 
-| Name     | Type                                                                       |
-|----------|----------------------------------------------------------------------------|
-| name     | `string`                                                                   |
-| callback | `(sender: CommandSender, label: string, args: string[]) => void | boolean` |
+| Name     | Type                                                                                                                                                           |
+|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name     | `string`                                                                                                                                                       |
+| callback | `(sender: ` [CommandSender](https://papermc.io/javadocs/paper/1.16/org/bukkit/command/CommandSender.html)`, label: string, args: string[]) => void \| boolean` |
 
 ### Description
 
-Registers command with `name` , and calls `callback` when the command is executed. The command is considered to have succeeded if the callback function returns either `undefined` (i.e. doesn't return anything) or `true` . If the callback function returns `false` , the command is considered to have failed.
+Registers command with `name`, and calls `callback` when the command is executed. The command is considered to have succeeded if the callback function returns either `undefined` (i.e. doesn't return anything) or `true` . If the callback function returns `false` , the command is considered to have failed.
 
 ### Examples
 
