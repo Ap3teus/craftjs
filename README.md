@@ -4,6 +4,8 @@
 
 Spigot Plugin that allows programming custom functionality for your server using Javascript. Inspired heavily by [Scriptcraft](https://github.com/walterhiggins/ScriptCraft) but trying to address some of it's issues.
 
+Core Javascript code is available at https://github.com/Ap3teus/craftjs-javascript
+
 ## Getting Started
 
 Currently the only way to obtain the plugin jar is to build it from the source.
