@@ -13,8 +13,9 @@ Currently the only way to obtain the plugin jar is to build it from the source.
 ### Building
 
 0. Make sure you have `maven` installed
-1. Run `mvn install`
-2. Copy the built jar from `target` to your server's plugins-folder
+1. Download and install [Graal Java runtime](https://www.graalvm.org/downloads) and make sure it's configured as your default Java (executing `java --version` should say `OpenJDK Runtime Environment GraalVM` )
+2. Run `mvn install`
+3. Copy the built jar from `target` to your server's plugins-folder
 
 ## Differences to Scriptcraft
 
