@@ -15,11 +15,5 @@ install:
   # Show Maven using GraalVM JDK
   - mvn --version
 
-  # Install GraalVM Native Image
-  - gu install native-image
-
-  # Check if Native Image was installed properly
-  - native-image --version
-
 script:
   - mvn install
