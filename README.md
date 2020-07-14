@@ -4,13 +4,13 @@
 
 Spigot Plugin that allows programming custom functionality for your server using Javascript. Inspired heavily by [Scriptcraft](https://github.com/walterhiggins/ScriptCraft) but trying to address some of it's issues.
 
-Core Javascript code is available at https://github.com/Ap3teus/craftjs-javascript
+Core Javascript code is available [here](https://github.com/Ap3teus/craftjs-javascript)
 
 ## Getting Started
 
-Currently the only way to obtain the plugin jar is to build it from the source.
+Download the plugin jar from [releases](https://github.com/Ap3teus/craftjs/releases) or build the code directly from source.
 
-### Building
+### Building from source
 
 0. Make sure you have `maven` installed
 1. Download and install [Graal Java runtime](https://www.graalvm.org/downloads) and make sure it's configured as your default Java (executing `java --version` should say `OpenJDK Runtime Environment GraalVM` )
