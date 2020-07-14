@@ -1,4 +1,7 @@
 language: minimal
+cache:
+  directories:
+    - $HOME/.m2
 
 install:
   # Install GraalVM with SDKMAN
