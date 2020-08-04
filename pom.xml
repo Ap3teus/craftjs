@@ -30,6 +30,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.graalvm.sdk</groupId>
+      <artifactId>graal-sdk</artifactId>
+      <version>20.1.0</version>
+    </dependency>
+    <dependency>
       <groupId>com.destroystokyo.paper</groupId>
       <artifactId>paper-api</artifactId>
       <version>1.16.1-R0.1-SNAPSHOT</version>
